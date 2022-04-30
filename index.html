@@ -152,28 +152,47 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-My-New-Post" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-LecoHot100" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/04/28/My-New-Post/">My New Post</a>
+      <a class="article-title" href="/2022/04/30/LecoHot100/">LecoHot100</a>
     </h1>
   
 
         
-        <a href="/2022/04/28/My-New-Post/" class="archive-article-date">
-  	<time datetime="2022-04-28T00:44:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-28</time>
+        <a href="/2022/04/30/LecoHot100/" class="archive-article-date">
+  	<time datetime="2022-04-29T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-30</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>第一篇博客</p>
-<p>#主要是自我介绍</p>
+        <h1 id="2-两数相加"><a href="#2-两数相加" class="headerlink" title="2. 两数相加"></a>2. 两数相加</h1><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/add-two-numbers/">2. 两数相加 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
+<p>注意审题，要求返回的是链表，而不是和</p>
+<p>并且返回的链表也是逆序的，所以不需要反转</p>
+<p>因为这道题要注意的就是<strong>进位</strong></p>
+<h5 id="下面是自己做题时的思路"><a href="#下面是自己做题时的思路" class="headerlink" title="下面是自己做题时的思路"></a>下面是自己做题时的思路</h5><blockquote>
+<p>为了简便，没有在题目提供的两个链表上操作<br>    而是自己创建了一个虚拟头部，用于承接两个节点之和<br>    当两个链表的指针都不是空时，将数值进行相加赋给节点，与放在新构建的链表尾部<br>    这里用了两个int来接收两个指针的值，如果此时指针为空，那么就为0，不影响后续计算<br>    为了记录进位，需要加上一个十位数记录count，并且需要与a和b一起相加，当结果大于9时，就需要进行取个位数与十位数操作<br>        结果小于9，则count需要置为0<br>       最后退出循环，判读count是否为0，不为0则为链表添加一个以count为val的节点<br>最后返回虚拟头部的next</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> ListNode <span class="title function_">addTwoNumbers</span><span class="params">(ListNode l1, ListNode l2)</span> &#123;</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">head</span> <span class="operator">=</span> <span class="literal">null</span>, tail = <span class="literal">null</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">carry</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (l1 != <span class="literal">null</span> || l2 != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">n1</span> <span class="operator">=</span> l1 != <span class="literal">null</span> ? l1.val : <span class="number">0</span>;</span><br><span class="line">            <span class="type">int</span> <span class="variable">n2</span> <span class="operator">=</span> l2 != <span class="literal">null</span> ? l2.val : <span class="number">0</span>;</span><br><span class="line">            <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> n1 + n2 + carry;</span><br><span class="line">            <span class="keyword">if</span> (head == <span class="literal">null</span>) &#123;</span><br><span class="line">                head = tail = <span class="keyword">new</span> <span class="title class_">ListNode</span>(sum % <span class="number">10</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                tail.next = <span class="keyword">new</span> <span class="title class_">ListNode</span>(sum % <span class="number">10</span>);</span><br><span class="line">                tail = tail.next;</span><br><span class="line">            &#125;</span><br><span class="line">            carry = sum / <span class="number">10</span>;</span><br><span class="line">            <span class="keyword">if</span> (l1 != <span class="literal">null</span>) &#123;</span><br><span class="line">                l1 = l1.next;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (l2 != <span class="literal">null</span>) &#123;</span><br><span class="line">                l2 = l2.next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (carry &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            tail.next = <span class="keyword">new</span> <span class="title class_">ListNode</span>(carry);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="3-无重复字符的最长子串"><a href="#3-无重复字符的最长子串" class="headerlink" title="3. 无重复字符的最长子串"></a>3. 无重复字符的最长子串</h1><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/">3. 无重复字符的最长子串 - 力扣（LeetCode） (leetcode-cn.com)</a></p>
+<p>审题：这里是说的子串，而不是子集合</p>
+<p>​	子串的需要是连续出现在原字符串中的，而子集合不需要连续</p>
+<p>这里使用的技巧是滑动窗口</p>
+<blockquote>
+<p>以(a)bcabcbb 开始的最长字符串为(abc)abcbb；<br>以 a(b)cabcbb 开始的最长字符串为a(bca)bcbb；<br>以ab(c)abcbb 开始的最长字符串为ab(cab)cbb；<br>以abc(a)bcbb 开始的最长字符串为abc(abc)bb；<br>以abca(b)cbb 开始的最长字符串为abca(bc)bb；<br>以abcab(c)bb 开始的最长字符串为abcab(cb)b；<br>以abcabc(b)b 开始的最长字符串为abcabc(b)b；<br>以abcabcb(b) 开始的最长字符串为abcabcb(b)。</p>
+</blockquote>
+<p>需要借用一个集合来记录窗口中是否有重复的字符串</p>
+<p>​	左指针移动时，需要同时从集合中移除该元素</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">lengthOfLongestSubstring</span><span class="params">(String s)</span> &#123;</span><br><span class="line">        <span class="comment">// 哈希集合，记录每个字符是否出现过</span></span><br><span class="line">        Set&lt;Character&gt; occ = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;Character&gt;();</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> s.length();</span><br><span class="line">        <span class="comment">// 右指针，初始值为 -1，相当于我们在字符串的左边界的左侧，还没有开始移动</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">rk</span> <span class="operator">=</span> -<span class="number">1</span>, ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i != <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="comment">// 左指针向右移动一格，移除一个字符</span></span><br><span class="line">                occ.remove(s.charAt(i - <span class="number">1</span>));</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span> (rk + <span class="number">1</span> &lt; n &amp;&amp; !occ.contains(s.charAt(rk + <span class="number">1</span>))) &#123;</span><br><span class="line">                <span class="comment">// 不断地移动右指针</span></span><br><span class="line">                occ.add(s.charAt(rk + <span class="number">1</span>));</span><br><span class="line">                ++rk;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 第 i 到 rk 个字符是一个极长的无重复字符子串</span></span><br><span class="line">            ans = Math.max(ans, rk - i + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
       
 
@@ -187,7 +206,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">introduce</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">algorithm</a>
         		</li>
       		
 		</ul>
@@ -197,93 +216,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2022/04/28/My-New-Post/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/04/28/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2022/04/28/hello-world/" class="archive-article-date">
-  	<time datetime="2022-04-27T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">begin</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/04/28/hello-world/">展开全文 >></a>
+          <a class="article-more-a" href="/2022/04/30/LecoHot100/">展开全文 >></a>
         </p>
       
 
@@ -406,11 +339,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">introduce</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">begin</a>
+                <a href="javascript:void(0)" class="js-tag color5">algorithm</a>
               </li>
             
             <div class="clearfix"></div>
